@@ -1,0 +1,57 @@
+{
+	"root": true,
+	"rules": {
+		"no-console": "warn",
+		"no-debugger": "error",
+		"no-empty": [
+			"error",
+			{
+				"allowEmptyCatch": true
+			}
+		],
+		"no-trailing-spaces": [
+			"error",
+			{
+				"skipBlankLines": true,
+				"ignoreComments": true
+			}
+		],
+		"no-extra-semi": "error",
+		"prefer-const": "error",
+		"quotes": [
+			"error",
+			"single"
+		],
+		"jsx-quotes": [
+			"error",
+			"prefer-single"
+		],
+		"max-len": [
+			"warn",
+			{
+				"code": 120,
+				"comments": 90
+			}
+		],
+		"comma-dangle": [
+			"warn",
+			{
+				"arrays": "always-multiline",
+				"objects": "always-multiline",
+				"imports": "never",
+				"exports": "always-multiline",
+				"functions": "always-multiline"
+			}
+		],
+		"semi": [
+			"warn",
+			"always"
+		]
+	},
+	"extends": [
+		"eslint:recommended",
+		"react-app",
+		"plugin:react/jsx-runtime",
+		"plugin:react-hooks/recommended"
+	]
+}
