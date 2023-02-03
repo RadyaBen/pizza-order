@@ -1,0 +1,15 @@
+{
+	"extends": [
+		"stylelint-config-standard-scss",
+		"stylelint-order-config-standard"
+	],
+	"plugins": [
+		"stylelint-order"
+	],
+	"rules": {
+		"string-quotes": "single",
+		"indentation": 4,
+		"color-hex-case": "lower",
+		"no-missing-end-of-source-newline": null
+	}
+}
