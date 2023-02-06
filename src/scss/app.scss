@@ -3,6 +3,8 @@
 @import './variables';
 @import './libs/normalize';
 
+@import './components/all';
+
 body {
 	background-color: $background;
 }
