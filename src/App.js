@@ -1,11 +1,9 @@
-import './App.css';
+import './scss/app.scss';
 
-const App = () => {
+export const App = () => {
 	return (
-		<div className='App'>
+		<div>
 			Hello World!
 		</div>
 	);
 };
-
-export { App };
