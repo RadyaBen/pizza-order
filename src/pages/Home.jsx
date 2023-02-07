@@ -1,11 +1,16 @@
 import React from 'react';
 import axios from 'axios';
 
-import { Categories, PizzaBlock, Sort } from '../components';
+import {
+	Categories,
+	PizzaBlock,
+	Skeleton,
+	Sort
+} from '../components';
 
 export const Home = () => {
     const [pizzaData, setPizzaData] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(false);
+    const [isLoading, setIsLoading] = React.useState(true);
 
     React.useEffect(() => {
         const controller = new AbortController();
@@ -24,8 +29,8 @@ export const Home = () => {
                     // eslint-disable-next-line
                     console.log(error);
                 }
-                setIsLoading(false);
             }
+            setIsLoading(false);
         };
 
         fetchPizzas();
@@ -44,11 +49,9 @@ export const Home = () => {
                 </div>
                 <h2 className='content__title'>All pizzas</h2>
                 <div className='content__items'>
-                    {isLoading ? (
-                        <div>Loading...</div>
-                    ) : (
-                        pizzaData.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)
-                    )}
+                    {isLoading
+                        ? [...new Array(6)].map((_, i) => <Skeleton key={i} />)
+                        : pizzaData.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />)}
                 </div>
             </div>
         </>
