@@ -1,0 +1,30 @@
+.error {
+	display: flex;
+	align-items: center;
+	flex-direction: column;
+	justify-content: center;
+
+	height: calc(100vh / 2);
+
+	text-align: center;
+
+	&__title {
+		color: #323a45;
+
+		font-size: 5em;
+		font-weight: 600;
+	}
+
+	h1,
+	h2,
+	p {
+		margin-bottom: 1rem;
+
+		font-weight: 500;
+		line-height: 1.2;
+	}
+
+	p {
+		margin-bottom: 1.8rem;
+	}
+}
