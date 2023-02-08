@@ -33,6 +33,15 @@
 		transform: translateY(1px);
 	}
 
+	&--black {
+		background-color: $black;
+
+		&:hover,
+		&:active {
+			background-color: lighten($color: $black, $amount: 10);
+		}
+	}
+
 	&--outline {
 		background-color: #fff;
 		border-color: $orange;
