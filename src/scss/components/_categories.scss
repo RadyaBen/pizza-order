@@ -1,31 +1,35 @@
 @import '../variables';
 
 .categories {
-	ul {
-		display: flex;
+    ul {
+        display: flex;
 
-		li {
-			background-color: #f9f9f9;
-			padding: 13px 30px;
-			border-radius: 30px;
-			margin-right: 10px;
-			font-weight: bold;
-			cursor: pointer;
-			transition: background-color 0.1s ease-in-out;
-			@include noselect();
+        li {
+            margin-right: 10px;
+            padding: 13px 30px;
 
-			&:hover {
-				background-color: darken(#f9f9f9, 2%);
-			}
+            cursor: pointer;
+            transition: background-color 0.1s ease-in-out;
 
-			&:active {
-				background-color: darken(#f9f9f9, 5%);
-			}
+            border-radius: 30px;
+            background-color: #f9f9f9;
 
-			&.active {
-				background-color: #282828;
-				color: #fff;
-			}
-		}
-	}
+            font-weight: bold;
+
+            &:hover {
+                background-color: color.adjust(#f9f9f9, $lightness: -2%);
+            }
+
+            &:active {
+                background-color: color.adjust(#f9f9f9, $lightness: -5%);
+            }
+
+            &.active {
+                color: #fff;
+                background-color: #282828;
+            }
+
+            @include noselect;
+        }
+    }
 }
