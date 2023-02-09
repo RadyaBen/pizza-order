@@ -1,15 +1,16 @@
 {
-	"extends": [
-		"stylelint-config-standard-scss",
+    "extends": [
+		"stylelint-config-standard-scss", 
 		"stylelint-order-config-standard"
 	],
-	"plugins": [
+    "plugins": [
 		"stylelint-order"
 	],
-	"rules": {
-		"string-quotes": "single",
-		"indentation": 4,
-		"color-hex-case": "lower",
-		"no-missing-end-of-source-newline": null
-	}
+    "rules": {
+        "color-hex-case": "lower",
+        "indentation": 4,
+        "no-missing-end-of-source-newline": null,
+        "selector-class-pattern": null,
+        "string-quotes": "single"
+    }
 }
