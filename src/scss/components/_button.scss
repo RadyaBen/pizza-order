@@ -36,6 +36,19 @@
         background-color: color.adjust($orange, $lightness: -12%);
     }
 
+    &--circle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 32px;
+        min-width: 32px;
+        height: 32px;
+        padding: 0;
+
+        border-width: 2px;
+    }
+
     &--black {
         background-color: $black;
 
