@@ -9,6 +9,7 @@
     "rules": {
         "color-hex-case": "lower",
         "indentation": 4,
+        "no-descending-specificity": null,
         "no-missing-end-of-source-newline": null,
         "selector-class-pattern": null,
         "string-quotes": "single"
