@@ -1,19 +1,43 @@
 import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
+import { setSelectedSortDataType } from '../../redux/slices/filterSlice';
+
+export const popupSortTypeList = [
+    { name: 'popularity (DESC)', sortBy: 'rating' },
+    { name: 'popularity (ASC)', sortBy: '-rating' },
+    { name: 'price (DESC)', sortBy: 'price' },
+    { name: 'price (ASC)', sortBy: '-price' },
+    { name: 'alphabetically (DESC)', sortBy: 'title' },
+    { name: 'alphabetically (ASC)', sortBy: '-title' },
+];
 
 export const Sort = () => {
     const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
-    const [activePopupNameIndex, setActivePopupNameIndex] = React.useState(0);
+    const sortRef = React.useRef(null);
 
-    const sortPopupNameList = ['popularity', 'price', 'alphabetical order'];
-    const sortPopupName = sortPopupNameList[activePopupNameIndex];
+    const { selectedSortDataType } = useSelector((state) => state.filter);
+    const dispatch = useDispatch();
 
-    const selectedPopupName = (i) => {
-        setActivePopupNameIndex(i);
+    React.useEffect(() => {
+		const handleClickOutside = e => {
+			if (sortRef.current && !sortRef.current.contains(e.target)) {
+				setIsVisiblePopup(false);
+			}
+		};
+
+		document.addEventListener('click', handleClickOutside);
+
+		return () => document.removeEventListener('click', handleClickOutside);
+    }, [isVisiblePopup]);
+
+    const handleSelectPopupName = (data) => {
+        dispatch(setSelectedSortDataType(data));
         setIsVisiblePopup(!isVisiblePopup);
     };
 
     return (
-        <div className='sort'>
+        <div className='sort' ref={sortRef}>
             <div className='sort__label'>
                 <svg
                     width='10'
@@ -28,17 +52,21 @@ export const Sort = () => {
                     />
                 </svg>
                 <b>Sort by:</b>
-                <span onClick={() => setIsVisiblePopup(!isVisiblePopup)}>{sortPopupName}</span>
+                <span onClick={() => setIsVisiblePopup(!isVisiblePopup)}>
+                    {selectedSortDataType.name}
+                </span>
             </div>
             {isVisiblePopup && (
                 <div className='sort__popup'>
                     <ul>
-                        {sortPopupNameList.map((popupName, i) => (
+                        {popupSortTypeList.map((popupData, i) => (
                             <li
                                 key={i}
-                                className={activePopupNameIndex === i ? 'active' : ''}
-                                onClick={() => selectedPopupName(i)}>
-                                {popupName}
+                                className={
+                                    selectedSortDataType.sortBy === popupData.sortBy ? 'active' : ''
+                                }
+                                onClick={() => handleSelectPopupName(popupData)}>
+                                {popupData.name}
                             </li>
                         ))}
                     </ul>
