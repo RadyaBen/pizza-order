@@ -10,15 +10,29 @@
         align-items: center;
         justify-content: space-between;
 
-        @media (max-width: 645px) {
+		@media (min-width: 280px) and (max-width: 915px) {
             flex-direction: column;
+        }
 
+        @media (max-width: 645px) {
             .header__cart {
                 margin-bottom: 20px;
             }
 
             .header__logo {
                 margin-bottom: 20px;
+            }
+        }
+
+        @media (min-width: 915px) and (max-width: 1150px) {
+            .header__logo {
+                width: 250px;
+            }
+        }
+
+        @media (min-width: 1150px) and (max-width: 1260px) {
+            .header__logo {
+                width: 300px;
             }
         }
     }

@@ -10,6 +10,7 @@ import {
     PizzaBlock,
     Skeleton,
     Sort,
+    NoResultsSearch,
     popupSortTypeList
 } from '../components';
 
@@ -26,7 +27,7 @@ export const Home = () => {
     const isMounted = React.useRef(false);
     const isQuerySearchString = React.useRef(false);
 
-    const { selectedCategoryIndex, selectedSortDataType, currentPage } = useSelector(
+    const { selectedCategoryIndex, selectedSortDataType, currentPage, searchQuery } = useSelector(
         (state) => state.filter,
     );
     const dispatch = useDispatch();
@@ -37,8 +38,9 @@ export const Home = () => {
     React.useEffect(() => {
         if (isMounted.current) {
             const queryString = qs.stringify({
-				selectedCategoryIndex,
+                selectedCategoryIndex,
                 sortBy: selectedSortDataType.sortBy,
+                search: searchQuery,
                 currentPage,
             });
 
@@ -46,8 +48,8 @@ export const Home = () => {
         }
 
         isMounted.current = true;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedCategoryIndex, selectedSortDataType.sortBy, currentPage]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [selectedCategoryIndex, selectedSortDataType.sortBy, searchQuery, currentPage]);
 
     // If there was a first render,
     // then the URL parameters are checked and saved to the state
@@ -84,12 +86,13 @@ export const Home = () => {
 
         return () => abortController.abort();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedCategoryIndex, selectedSortDataType, currentPage]);
+    }, [selectedCategoryIndex, selectedSortDataType, currentPage, searchQuery]);
 
     const fetchPizzas = async (abortSignal) => {
         const category = selectedCategoryIndex > 0 ? `category=${selectedCategoryIndex}` : '';
         const sortBy = selectedSortDataType.sortBy.replace('-', '');
         const order = selectedSortDataType.sortBy.includes('-') ? 'asc' : 'desc';
+        const search = searchQuery ? `&search=${searchQuery}` : '';
 
         try {
             setIsLoading(true);
@@ -98,7 +101,8 @@ export const Home = () => {
 					page=${currentPage}&limit=4&
 					${category}
 					&sortBy=${sortBy}
-					&order=${order}`,
+					&order=${order}
+					${search}`,
                 { signal: abortSignal },
             );
             setPizzaData(data);
@@ -139,7 +143,20 @@ export const Home = () => {
                     />
                 </div>
                 <h2 className='content__title'>All pizzas</h2>
-                <div className='content__items'>{isLoading ? skeletons : pizzas}</div>
+                <div
+                    className={
+                        !pizzaData.length && !isLoading
+                            ? 'content__search-message'
+                            : 'content__items'
+                    }>
+                    {isLoading ? (
+                        skeletons
+                    ) : !pizzaData.length && !isLoading ? (
+                        <NoResultsSearch searchQuery={searchQuery} />
+                    ) : (
+                        pizzas
+                    )}
+                </div>
                 <Pagination currentPage={currentPage} onPageChange={handlePageChange} />
             </div>
         </>
