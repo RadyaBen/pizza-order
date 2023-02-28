@@ -1,8 +1,12 @@
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+
+import { Search } from './ui/Search/Search';
 
 import pizzaLogo from '../assets/img/pizza-logo.svg';
 
 export const Header = () => {
+    const location = useLocation();
+
     return (
         <div className='header'>
             <div className='container'>
@@ -15,6 +19,7 @@ export const Header = () => {
                         </div>
                     </div>
                 </Link>
+                {location.pathname !== '/cart' && <Search />}
                 <div className='header__cart'>
                     <Link to='/cart' className='button button--cart'>
                         <span>395 ₴</span>
