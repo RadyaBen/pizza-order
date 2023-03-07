@@ -1,10 +1,39 @@
 import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 
-export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
+import { addPizzaToCart } from '../../redux/slices/cartSlice';
+
+const pizzaTypeNames = ['Thin', 'Traditional'];
+
+export const PizzaBlock = ({
+	id,
+	imageUrl,
+	title,
+	types,
+	sizes,
+	price,
+}) => {
     const [activePizzaType, setActivePizzaType] = React.useState(0);
     const [activePizzaSize, setActivePizzaSize] = React.useState(0);
 
-    const pizzaTypeNames = ['Thin', 'Traditional'];
+    const cartItem = useSelector((state) =>
+        state.cart.cartItems.find((pizza) => pizza.id === id),
+    );
+    const dispatch = useDispatch();
+
+    const cartTotalQuantity = cartItem ? cartItem.quantity : 0;
+
+    const handleAddPizzaToCart = () => {
+        const pizza = {
+            id,
+			imageUrl,
+            title,
+			type: pizzaTypeNames[activePizzaType],
+            size: sizes[activePizzaSize],
+            price,
+        };
+        dispatch(addPizzaToCart(pizza));
+    };
 
     return (
         <div className='pizza-block-wrapper'>
@@ -35,7 +64,9 @@ export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
                 </div>
                 <div className='pizza-block__bottom'>
                     <div className='pizza-block__price'>From {price} ₴</div>
-                    <button className='button button--outline button--add'>
+                    <button
+                        className='button button--outline button--add'
+                        onClick={handleAddPizzaToCart}>
                         <svg
                             width='12'
                             height='12'
@@ -49,7 +80,7 @@ export const PizzaBlock = ({ title, price, imageUrl, sizes, types }) => {
                             />
                         </svg>
                         <span>Add</span>
-                        <i>0</i>
+                        {cartTotalQuantity > 0 && <i>{cartTotalQuantity}</i>}
                     </button>
                 </div>
             </div>

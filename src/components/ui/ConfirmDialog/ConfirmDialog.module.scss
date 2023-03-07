@@ -1,0 +1,52 @@
+@use 'sass:color';
+@import '../../../scss/variables';
+
+.confirm-dialog {
+    width: 400px;
+    padding: 30px;
+
+    text-align: center;
+
+    color: #666;
+    border-radius: 10px;
+    background: #fff;
+    box-shadow: 0 20px 75px rgb(0 0 0 / 13%);
+
+    &__title {
+        margin-bottom: 20px;
+
+        font-size: 32px;
+    }
+
+    &__body {
+        font-size: 17px;
+    }
+
+    &__buttons {
+        display: flex;
+        justify-content: space-between;
+
+        margin-top: 20px;
+
+        .btn--cancel {
+            color: color.adjust($gray-line, $lightness: -50%);
+
+            border-color: color.adjust($gray-line, $lightness: -10%);
+            background-color: color.adjust($gray-line, $lightness: 50%);
+
+            &:hover {
+                color: color.adjust($gray-line, $lightness: 100%);
+                border-color: color.adjust($gray-line, $lightness: -80%);
+                background-color: color.adjust($gray-line, $lightness: -80%);
+            }
+        }
+
+        .btn--delete {
+            background: #f23b26;
+
+            &:hover {
+                background: #d9210d;
+            }
+        }
+    }
+}
