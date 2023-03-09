@@ -12,6 +12,12 @@
         "no-descending-specificity": null,
         "no-missing-end-of-source-newline": null,
         "selector-class-pattern": null,
+        "selector-pseudo-class-no-unknown": [
+            true,
+            {
+                "ignorePseudoClasses": ["global"]
+            }
+        ],
         "string-quotes": "single"
     }
 }
