@@ -5,10 +5,14 @@ import { App } from './App';
 
 import { store } from './redux/store';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const rootElement = document.getElementById('root');
 
-root.render(
-    <Provider store={store}>
-        <App />
-    </Provider>,
-);
+if (rootElement) {
+    const root = ReactDOM.createRoot(rootElement);
+
+    root.render(
+        <Provider store={store}>
+            <App />
+        </Provider>,
+    );
+}
