@@ -1,7 +1,7 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { addPizzaToCart } from '../../redux/slices/cartSlice';
+import { addPizzaToCart } from '../../redux/cart/cartSlice';
 
 const pizzaTypeNames = ['Thin', 'Traditional'];
 
@@ -26,9 +26,9 @@ export const PizzaBlock = ({
     const handleAddPizzaToCart = () => {
         const pizza = {
             id,
-			imageUrl,
+            imageUrl,
             title,
-			type: pizzaTypeNames[activePizzaType],
+            type: pizzaTypeNames[activePizzaType],
             size: sizes[activePizzaSize],
             price,
         };

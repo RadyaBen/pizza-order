@@ -5,7 +5,7 @@ import { confirmAlert } from 'react-confirm-alert';
 import { CartItem } from '../components/ui/CartItem/CartItem';
 import { ConfirmDialog, EmptyCart } from '../components';
 
-import { clearCart } from '../redux/slices/cartSlice';
+import { clearCart } from '../redux/cart/cartSlice';
 import { getTotalCartPizzasCount } from '../utils/getTotalCount';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';

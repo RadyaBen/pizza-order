@@ -1,0 +1,19 @@
+.request-error {
+    max-width: 540px;
+
+    &__message {
+        margin-top: 1.5rem;
+
+        color: #323a45;
+
+        font-weight: 700;
+
+        @media (max-width: 550px) {
+            max-width: 300px;
+        }
+    }
+
+    &__description {
+        max-width: 390px;
+    }
+}

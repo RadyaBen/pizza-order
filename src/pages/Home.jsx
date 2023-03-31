@@ -1,13 +1,14 @@
 import React from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-import axios from 'axios';
 import qs from 'qs';
+import classNames from 'classnames';
 
 import {
     Categories,
     Pagination,
     PizzaBlock,
+    ErrorMessage,
     Skeleton,
     Sort,
     NoResultsSearch,
@@ -19,14 +20,15 @@ import {
     setSelectedSortDataType,
     setCurrentPage,
     setQueryFilters
-} from '../redux/slices/filterSlice';
+} from '../redux/filter/filterSlice';
+import { fetchPizzas } from '../redux/pizzas/pizzasSlice';
+import { selectPizzaData } from '../redux/pizzas/pizzasSelectors';
 
 export const Home = () => {
-    const [pizzaData, setPizzaData] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
     const isMounted = React.useRef(false);
     const isQuerySearchString = React.useRef(false);
 
+    const { pizzas, pizzasRequestStatus, requestError } = useSelector(selectPizzaData);
     const { selectedCategoryIndex, selectedSortDataType, currentPage, searchQuery } = useSelector(
         (state) => state.filter,
     );
@@ -75,47 +77,30 @@ export const Home = () => {
     }, []);
 
     React.useEffect(() => {
-        const abortController = new AbortController();
-        const abortSignal = abortController.signal;
-
         if (!isQuerySearchString.current) {
-            fetchPizzas(abortSignal);
+            getAllPizzas();
         }
 
         isQuerySearchString.current = false;
 
-        return () => abortController.abort();
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [selectedCategoryIndex, selectedSortDataType, currentPage, searchQuery]);
+    }, [selectedCategoryIndex, selectedSortDataType.sortBy, searchQuery, currentPage]);
 
-    const fetchPizzas = async (abortSignal) => {
+    const getAllPizzas = async () => {
         const category = selectedCategoryIndex > 0 ? `category=${selectedCategoryIndex}` : '';
         const sortBy = selectedSortDataType.sortBy.replace('-', '');
         const order = selectedSortDataType.sortBy.includes('-') ? 'asc' : 'desc';
         const search = searchQuery ? `&search=${searchQuery}` : '';
 
-        try {
-            setIsLoading(true);
-            const { data } = await axios.get(
-                `https://63d90e445a330a6ae173a6a9.mockapi.io/pizzas?
-					page=${currentPage}&limit=4&
-					${category}
-					&sortBy=${sortBy}
-					&order=${order}
-					${search}`,
-                { signal: abortSignal },
-            );
-            setPizzaData(data);
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                // eslint-disable-next-line
-                console.log('Axios Error with Message: ' + error.message);
-            } else {
-                // eslint-disable-next-line
-                console.log(error);
-            }
-        }
-        setIsLoading(false);
+        dispatch(
+            fetchPizzas({
+                category,
+                sortBy,
+                order,
+                search,
+                currentPage,
+            }),
+        );
     };
 
     const handleSelectCategoryIndex = (idx) => {
@@ -126,8 +111,12 @@ export const Home = () => {
         dispatch(setCurrentPage(number));
     };
 
-    const pizzas = pizzaData.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
+    const pizzaData = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
     const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+    const contentStyles = classNames({
+        'content__search-message': !pizzas.length && pizzasRequestStatus === 'succeeded',
+        'content__items': pizzas.length && pizzasRequestStatus === 'succeeded',
+    });
 
     return (
         <>
@@ -143,20 +132,19 @@ export const Home = () => {
                     />
                 </div>
                 <h2 className='content__title'>All pizzas</h2>
-                <div
-                    className={
-                        !pizzaData.length && !isLoading
-                            ? 'content__search-message'
-                            : 'content__items'
-                    }>
-                    {isLoading ? (
-                        skeletons
-                    ) : !pizzaData.length && !isLoading ? (
-                        <NoResultsSearch searchQuery={searchQuery} />
-                    ) : (
-                        pizzas
-                    )}
-                </div>
+                {pizzasRequestStatus === 'error' ? (
+                    <ErrorMessage requestError={requestError} />
+                ) : (
+                    <div className={contentStyles}>
+                        {pizzasRequestStatus === 'loading' ? (
+                            skeletons
+                        ) : !pizzas.length && pizzasRequestStatus === 'succeeded' ? (
+                            <NoResultsSearch searchQuery={searchQuery} />
+                        ) : (
+                            pizzaData
+                        )}
+                    </div>
+                )}
                 <Pagination currentPage={currentPage} onPageChange={handlePageChange} />
             </div>
         </>

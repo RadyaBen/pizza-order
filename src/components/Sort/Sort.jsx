@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { setSelectedSortDataType } from '../../redux/slices/filterSlice';
+import { setSelectedSortDataType } from '../../redux/filter/filterSlice';
 
 export const popupSortTypeList = [
     { name: 'popularity (DESC)', sortBy: 'rating' },
@@ -20,15 +20,15 @@ export const Sort = () => {
     const dispatch = useDispatch();
 
     React.useEffect(() => {
-		const handleClickOutside = e => {
-			if (sortRef.current && !sortRef.current.contains(e.target)) {
-				setIsVisiblePopup(false);
-			}
-		};
+        const handleClickOutside = (e) => {
+            if (sortRef.current && !sortRef.current.contains(e.target)) {
+                setIsVisiblePopup(false);
+            }
+        };
 
-		document.addEventListener('click', handleClickOutside);
+        document.addEventListener('click', handleClickOutside);
 
-		return () => document.removeEventListener('click', handleClickOutside);
+        return () => document.removeEventListener('click', handleClickOutside);
     }, [isVisiblePopup]);
 
     const handleSelectPopupName = (data) => {

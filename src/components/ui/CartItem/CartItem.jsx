@@ -7,7 +7,7 @@ import {
     addPizzaToCart,
     decreaseCartQuantity,
     removePizzaFromCart
-} from '../../../redux/slices/cartSlice';
+} from '../../../redux/cart/cartSlice';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
@@ -37,7 +37,7 @@ export const CartItem = ({
                     <ConfirmDialog
                         title='Delete Confirmation'
                         message='Are you sure you want to delete this item?'
-						deletion='item'
+                        deletion='item'
                         onRemovePizza={() => dispatch(removePizzaFromCart(id))}
                         onClose={onClose}
                     />
