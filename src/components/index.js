@@ -7,5 +7,6 @@ export * from './Sort/Sort';
 export * from './ui/CartItem/CartItem';
 export * from './ui/ConfirmDialog/ConfirmDialog';
 export * from './ui/EmptyCart/EmptyCart';
+export * from './ui/ErrorMessage/ErrorMessage';
 export * from './ui/Header';
 export * from './ui/NoResultsSearch';
