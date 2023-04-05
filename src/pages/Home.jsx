@@ -23,15 +23,23 @@ import {
 } from '../redux/filter/filterSlice';
 import { fetchPizzas } from '../redux/pizzas/pizzasSlice';
 import { selectPizzaData } from '../redux/pizzas/pizzasSelectors';
+import { selectFilter } from '../redux/filter/filterSelectors';
 
 export const Home = () => {
     const isMounted = React.useRef(false);
     const isQuerySearchString = React.useRef(false);
 
-    const { pizzas, pizzasRequestStatus, requestError } = useSelector(selectPizzaData);
-    const { selectedCategoryIndex, selectedSortDataType, currentPage, searchQuery } = useSelector(
-        (state) => state.filter,
-    );
+    const {
+		pizzas,
+		pizzasRequestStatus,
+		requestError,
+	} = useSelector(selectPizzaData);
+    const {
+		selectedCategoryIndex,
+		selectedSortDataType,
+		currentPage,
+		searchQuery,
+	} = useSelector(selectFilter);
     const dispatch = useDispatch();
 
     const location = useLocation();
