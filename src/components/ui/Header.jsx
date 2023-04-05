@@ -2,12 +2,14 @@ import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 
 import { Search } from './Search/Search';
+
+import { selectCart } from '../../redux/cart/cartSelectors';
 import { getTotalCartPizzasCount } from '../../utils/getTotalCount';
 
 import pizzaLogo from '../../assets/img/pizza-logo.svg';
 
 export const Header = () => {
-    const { cartItems, cartTotalPrice } = useSelector((state) => state.cart);
+    const { cartItems, cartTotalPrice } = useSelector(selectCart);
 
     const location = useLocation();
 

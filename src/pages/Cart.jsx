@@ -2,17 +2,21 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { confirmAlert } from 'react-confirm-alert';
 
-import { CartItem } from '../components/ui/CartItem/CartItem';
-import { ConfirmDialog, EmptyCart } from '../components';
+import {
+	CartItem,
+	ConfirmDialog,
+	EmptyCart
+} from '../components';
 
 import { clearCart } from '../redux/cart/cartSlice';
+import { selectCart } from '../redux/cart/cartSelectors';
 import { getTotalCartPizzasCount } from '../utils/getTotalCount';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
 export const Cart = () => {
     const dispatch = useDispatch();
-    const { cartItems, cartTotalPrice } = useSelector((state) => state.cart);
+    const { cartItems, cartTotalPrice } = useSelector(selectCart);
 
     const totalCartPizzasCount = getTotalCartPizzasCount(cartItems);
 

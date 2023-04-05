@@ -2,6 +2,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
 import { setSelectedSortDataType } from '../../redux/filter/filterSlice';
+import { selectFilter } from '../../redux/filter/filterSelectors';
 
 export const popupSortTypeList = [
     { name: 'popularity (DESC)', sortBy: 'rating' },
@@ -16,7 +17,7 @@ export const Sort = () => {
     const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
     const sortRef = React.useRef(null);
 
-    const { selectedSortDataType } = useSelector((state) => state.filter);
+    const { selectedSortDataType } = useSelector(selectFilter);
     const dispatch = useDispatch();
 
     React.useEffect(() => {
