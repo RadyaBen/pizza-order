@@ -11,6 +11,10 @@
         justify-content: center;
     }
 
+    .disabled-link {
+        pointer-events: none;
+    }
+
     &__image {
         width: 260px;
     }
@@ -22,6 +26,12 @@
 
         font-size: 20px;
         font-weight: 900;
+
+        &:hover {
+            text-decoration: underline;
+
+            color: #fe5f1e;
+        }
     }
 
     &__selector {

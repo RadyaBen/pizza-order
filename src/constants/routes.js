@@ -1,4 +1,5 @@
 export const ROUTES = {
-	homePage: '/',
-	cart: '/cart',
+    homePage: '/',
+    pizzaPage: (pizzaId = null) => (pizzaId ? `/pizzas/${pizzaId}` : '/pizzas/:pizzaId'),
+    cart: '/cart',
 };

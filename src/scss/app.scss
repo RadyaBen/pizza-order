@@ -47,9 +47,10 @@ body {
         }
 
         p {
+            margin-bottom: 1.8rem;
+
             font-size: 18px;
             font-weight: 500;
-            margin-bottom: 1.8rem;
         }
 
         @media (min-width: 285px) and (max-width: 390px) {
@@ -149,6 +150,12 @@ body {
                 }
             }
         }
+    }
+
+    &__skeleton {
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 
