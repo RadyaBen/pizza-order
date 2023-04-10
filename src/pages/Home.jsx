@@ -12,14 +12,14 @@ import {
     Skeleton,
     Sort,
     NoResultsSearch,
-    popupSortTypeList
+    popupSortTypeList,
 } from '../components';
 
 import {
     setSelectedCategoryIndex,
     setSelectedSortDataType,
     setCurrentPage,
-    setQueryFilters
+    setQueryFilters,
 } from '../redux/filter/filterSlice';
 import { fetchPizzas } from '../redux/pizzas/pizzasSlice';
 import { selectPizzaData } from '../redux/pizzas/pizzasSelectors';

@@ -6,10 +6,12 @@ export const fetchPizzas = createAsyncThunk(
     async (params, { rejectWithValue, signal }) => {
         const { category, sortBy, order, search, currentPage } = params;
 
+        const API_ENDPOINT = process.env.REACT_APP_PIZZAS_API_ENDPOINT;
+
         try {
             const { data } = await axios.get(
-                `https://63d90e445a330a6ae173a6a9.mockapi.io/pizzas?
-					page=${currentPage}&limit=4&
+                API_ENDPOINT +
+                    `?page=${currentPage}&limit=4&
 					${category}
 					&sortBy=${sortBy}
 					&order=${order}

@@ -1,8 +1,12 @@
 import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link, useParams, useLocation } from 'react-router-dom';
+import classNames from 'classnames';
 
 import { addPizzaToCart } from '../../redux/cart/cartSlice';
 import { selectCartItemById } from '../../redux/cart/cartSelectors';
+
+import { ROUTES } from '../../constants/routes';
 
 const pizzaTypeNames = ['Thin', 'Traditional'];
 
@@ -20,6 +24,9 @@ export const PizzaBlock = ({
     const cartItem = useSelector(selectCartItemById(id));
     const dispatch = useDispatch();
 
+	const { pizzaId } = useParams();
+	const location = useLocation();
+
     const cartTotalQuantity = cartItem ? cartItem.quantity : 0;
 
     const handleAddPizzaToCart = () => {
@@ -34,11 +41,17 @@ export const PizzaBlock = ({
         dispatch(addPizzaToCart(pizza));
     };
 
+    const linkStyles = classNames({
+        'disabled-link': location.pathname === `/pizzas/${pizzaId}`,
+    });
+
     return (
         <div className='pizza-block-wrapper'>
             <div className='pizza-block'>
-                <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
-                <h4 className='pizza-block__title'>{title}</h4>
+                <Link className={linkStyles} to={ROUTES.pizzaPage(id)}>
+                    <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
+                    <h4 className='pizza-block__title'>{title}</h4>
+                </Link>
                 <div className='pizza-block__selector'>
                     <ul>
                         {types.map((typeNumber) => (
