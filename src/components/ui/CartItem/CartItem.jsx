@@ -6,7 +6,7 @@ import { ConfirmDialog } from '../ConfirmDialog/ConfirmDialog';
 import {
     addPizzaToCart,
     decreaseCartQuantity,
-    removePizzaFromCart
+    removePizzaFromCart,
 } from '../../../redux/cart/cartSlice';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
@@ -60,7 +60,9 @@ export const CartItem = ({
             <div className='cart__item-count'>
                 <div
                     className='button button--outline button--circle cart__item-count-minus'
-                    onClick={handleDecreasePizzaQuantity}>
+                    onClick={() => {
+                        quantity > 1 ? handleDecreasePizzaQuantity() : handleRemovePizza();
+                    }}>
                     <svg
                         width='10'
                         height='10'
