@@ -34,7 +34,11 @@ const cartSlice = createSlice({
             const pizzaInCart = state.cartItems.find((pizza) => pizza.id === action.payload);
 
             if (pizzaInCart) {
-                pizzaInCart.quantity--;
+                if (pizzaInCart.quantity === 1) {
+                    state.cartItems = state.cartItems.filter((item) => item.quantity > 0);
+                } else {
+                    pizzaInCart.quantity--;
+                }
             }
 
             state.cartTotalPrice = getTotalCartPizzasPrice(state.cartItems);
