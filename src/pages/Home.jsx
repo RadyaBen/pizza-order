@@ -28,6 +28,7 @@ import { selectFilter } from '../redux/filter/filterSelectors';
 export const Home = () => {
     const isMounted = React.useRef(false);
     const isQuerySearchString = React.useRef(false);
+    const containerRef = React.useRef(null);
 
     const {
 		pizzas,
@@ -109,6 +110,8 @@ export const Home = () => {
                 currentPage,
             }),
         );
+
+		scrollToTop();
     };
 
     const handleSelectCategoryIndex = (idx) => {
@@ -119,6 +122,12 @@ export const Home = () => {
         dispatch(setCurrentPage(number));
     };
 
+	const scrollToTop = () => {
+		if (containerRef.current) {
+			containerRef.current.scrollIntoView({ behavior: 'smooth' });
+		}
+	};
+
     const pizzaData = pizzas.map((pizza) => <PizzaBlock key={pizza.id} {...pizza} />);
     const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
     const contentStyles = classNames({
@@ -128,7 +137,7 @@ export const Home = () => {
 
     return (
         <>
-            <div className='container'>
+            <div className='container' ref={containerRef}>
                 <div className='content__top'>
                     <Categories
                         selectedCategoryIndex={selectedCategoryIndex}
