@@ -46,10 +46,10 @@ export const PizzaPage = () => {
 
     return (
         <div className={pizzaStyles}>
-            {!pizza ? (
-                <Skeleton />
-            ) : isRequestError ? (
+            {isRequestError ? (
                 <NotFoundError />
+            ) : !pizza ? (
+                <Skeleton />
             ) : (
                 <PizzaBlock {...pizza} />
             )}
