@@ -4,7 +4,9 @@ export const NotFound = () => {
     return (
         <div className='wrapper'>
             <Header />
-            <NotFoundError />
+			<div className='content'>
+				<NotFoundError />
+			</div>
         </div>
     );
 };
