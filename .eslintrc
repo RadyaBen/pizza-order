@@ -1,5 +1,9 @@
 {
 	"root": true,
+	"parser": "@typescript-eslint/parser",
+	"plugins": [
+		"@typescript-eslint"
+	],
 	"rules": {
 		"no-console": "warn",
 		"no-debugger": "error",
@@ -46,12 +50,23 @@
 		"semi": [
 			"warn",
 			"always"
+		],
+		"@typescript-eslint/semi": [
+			"warn"
+		],
+		"@typescript-eslint/no-empty-interface": [
+			"error",
+			{
+				"allowSingleExtends": true
+			}
 		]
 	},
 	"extends": [
 		"eslint:recommended",
 		"react-app",
 		"plugin:react/jsx-runtime",
-		"plugin:react-hooks/recommended"
+		"plugin:react-hooks/recommended",
+		"plugin:@typescript-eslint/eslint-recommended",
+		"plugin:@typescript-eslint/recommended"
 	]
 }
