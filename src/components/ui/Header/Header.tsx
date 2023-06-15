@@ -4,7 +4,7 @@ import { Search } from '../../index';
 
 import { selectCart } from '../../../redux/cart';
 import { useAppSelector } from '../../../hooks/redux';
-import { getTotalCartPizzasCount } from '../../../utils/getTotalCount';
+import { getTotalCartPizzasCount } from '../../../utils';
 
 import pizzaLogo from '../../../assets/img/pizza-logo.svg';
 
