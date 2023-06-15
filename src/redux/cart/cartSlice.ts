@@ -1,12 +1,17 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
 
-import { getTotalCartPizzasPrice } from '../../utils/getTotalPrice';
+import {
+	getTotalCartPizzasPrice,
+	getCartFromLocalStorage,
+} from '../../utils';
 import { CartItem } from '../../interfaces';
 import { CartState } from './index';
 
+const { cartItems, cartTotalPrice } = getCartFromLocalStorage();
+
 const initialState: CartState = {
-    cartItems: [],
-    cartTotalPrice: 0,
+    cartItems,
+    cartTotalPrice,
 };
 
 const cartSlice = createSlice({

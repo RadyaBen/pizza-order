@@ -1,16 +1,29 @@
 import { configureStore } from '@reduxjs/toolkit';
+import {
+    persistStore,
+    FLUSH,
+    REHYDRATE,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+} from 'redux-persist';
 
-import pizzasReducer from './pizzas/pizzasSlice';
-import filterReducer from './filter/filterSlice';
-import cartReducer from './cart/cartSlice';
+import rootReducer from './rootReducer';
 
-export const store = configureStore({
-    reducer: {
-        pizzas: pizzasReducer,
-        filter: filterReducer,
-        cart: cartReducer,
-    },
+const store = configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+        getDefaultMiddleware({
+            serializableCheck: {
+                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+            },
+        }),
 });
+
+export const persistor = persistStore(store);
+
+export { store };
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
