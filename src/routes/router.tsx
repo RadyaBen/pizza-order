@@ -1,33 +1,33 @@
-import { createBrowserRouter } from 'react-router-dom';
-
 import {
-	HomePage,
-	PizzaPage,
-	CartPage,
-	NotFoundPage,
-} from '../pages';
-import { RootLayout } from '../layouts/RootLayout';
+	Route,
+	createBrowserRouter,
+	createRoutesFromElements,
+} from 'react-router-dom';
 
+import { HomePage, NotFoundPage } from '../pages';
+import { RootLayout } from '../layouts/RootLayout';
+import { LazyLoadPage } from '../components';
 import { ROUTES } from '../constants';
 
-export const router = createBrowserRouter([
-    {
-        path: ROUTES.homePage,
-        element: <RootLayout />,
-        errorElement: <NotFoundPage />,
-        children: [
-            {
-                index: true,
-                element: <HomePage />,
-            },
-            {
-                path: ROUTES.pizzaPage(),
-                element: <PizzaPage />,
-            },
-            {
-                path: ROUTES.cartPage,
-                element: <CartPage />,
-            },
-        ],
-    },
-]);
+export const router = createBrowserRouter(
+    createRoutesFromElements(
+        <Route
+			path={ROUTES.homePage}
+			element={<RootLayout />}
+			errorElement={<NotFoundPage />}
+		>
+            <Route
+				index
+				element={<HomePage />}
+			/>
+            <Route
+				path={ROUTES.pizzaPage()}
+				element={<LazyLoadPage componentName='PizzaPage' />}
+			/>
+            <Route
+				path={ROUTES.cartPage}
+				element={<LazyLoadPage componentName='CartPage' />}
+			/>
+        </Route>,
+    ),
+);

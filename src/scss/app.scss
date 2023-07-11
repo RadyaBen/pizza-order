@@ -191,6 +191,7 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
+        margin-bottom: 35px;
     }
 
     .content__title {
@@ -263,10 +264,6 @@ body {
         padding: 20px 0 25px;
 
         border-bottom: 1px solid $gray-line;
-
-        &:first-of-type {
-            margin-top: 35px;
-        }
 
         &-img {
             display: flex;
