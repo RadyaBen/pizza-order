@@ -8,7 +8,7 @@ import {
     Pagination,
     PizzaBlock,
     ErrorMessage,
-    Skeleton,
+    PizzaSkeleton,
     Sort,
     NoResultsSearch,
 } from '../components';
@@ -135,7 +135,7 @@ export const HomePage = () => {
 	};
 
     const pizzaData = pizzas.map((pizza: PizzaItem) => <PizzaBlock key={pizza.id} {...pizza} />);
-    const skeletons = [...new Array(6)].map((_, i) => <Skeleton key={i} />);
+	const skeletons = [...new Array(6)].map((_, i) => <PizzaSkeleton key={i} />);
     const contentStyles = classNames({
         'content__search-message': !pizzas.length && pizzasRequestStatus === 'succeeded',
         'content__items': pizzas.length && pizzasRequestStatus === 'succeeded',

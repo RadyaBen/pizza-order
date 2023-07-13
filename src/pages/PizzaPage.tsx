@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import {
 	PizzaBlock,
-	Skeleton,
+	PizzaSkeleton,
 	NotFoundError,
 } from '../components';
 
@@ -47,8 +47,8 @@ export const PizzaPage = () => {
     };
 
     const pizzaStyles = classNames({
-        content__skeleton: !pizza,
-        container: pizza,
+        'content__skeleton': !pizza,
+        'container': pizza,
     });
 
     return (
@@ -56,7 +56,7 @@ export const PizzaPage = () => {
             {isRequestError ? (
                 <NotFoundError />
             ) : !pizza ? (
-                <Skeleton />
+                <PizzaSkeleton />
             ) : (
                 <PizzaBlock {...pizza} />
             )}

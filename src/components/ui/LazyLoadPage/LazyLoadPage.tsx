@@ -1,7 +1,7 @@
 import React from 'react';
 import classNames from 'classnames';
 
-import { CartSkeleton, Skeleton } from '../../index';
+import { CartSkeleton, PizzaSkeleton } from '../../index';
 import { selectCart } from '../../../redux/cart';
 import { useAppSelector } from '../../../hooks/redux';
 import { LazyLoadPageProps } from './LazyLoadPage.props';
@@ -36,7 +36,7 @@ export const LazyLoadPage = ({ componentName }: LazyLoadPageProps) => {
                 fallback={
                     <div className={fallbackStyles}>
                         {isPizzaPage ? (
-                            <Skeleton />
+                            <PizzaSkeleton />
                         ) : (
                             <CartSkeleton cartItems={cartItems} />
                         )}
