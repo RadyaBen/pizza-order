@@ -48,12 +48,12 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => (
         </div>
         <div className='cart__bottom-buttons'>
             <Skeleton
-				style={{ borderRadius: 30 }}
+				borderRadius={30}
 				width={210}
 				height={55}
 			/>
             <Skeleton
-				style={{ borderRadius: 30 }}
+				borderRadius={30}
 				width={210}
 				height={55}
 			/>
