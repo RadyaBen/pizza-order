@@ -138,7 +138,7 @@ export const HomePage = () => {
 
     const contentStyles = classNames({
         'content__search-message': !pizzas.length && pizzasRequestStatus === 'succeeded',
-        'content__items': pizzas.length && pizzasRequestStatus === 'succeeded',
+        'content__items': pizzas.length || pizzasRequestStatus === 'loading',
     });
 
     return (
