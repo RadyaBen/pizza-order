@@ -2,10 +2,11 @@ import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
 
 import {
+	Button,
 	CartItem,
 	ConfirmDialog,
 	EmptyCart,
-} from '../components';
+ } from '../components';
 
 import { clearCart, selectCart } from '../redux/cart';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -148,9 +149,9 @@ export const CartPage = () => {
 
                                     <span>Go back</span>
                                 </Link>
-                                <button className='button pay-btn'>
+                                <Button className='button pay-btn'>
                                     <span>Pay now</span>
-                                </button>
+                                </Button>
                             </div>
                         </div>
                     </div>

@@ -1,5 +1,4 @@
-import classNames from 'classnames';
-
+import { Button } from '../../index';
 import { ConfirmDialogProps } from './ConfirmDialog.props';
 
 import styles from './ConfirmDialog.module.scss';
@@ -17,21 +16,21 @@ export const ConfirmDialog = ({
             <h1 className={styles['confirm-dialog__title']}>{title}</h1>
             <p className={styles['confirm-dialog__body']}>{message}</p>
             <div className={styles['confirm-dialog__buttons']}>
-                <button
+                <Button
+					className={styles['btn--cancel']}
 					onClick={onClose}
-					className={classNames('button', styles['btn--cancel'])}
 				>
                     Cancel
-                </button>
-                <button
+                </Button>
+                <Button
+					className={styles['btn--delete']}
                     onClick={() => {
                         deletion === 'item' ? onRemovePizza?.() : onClearCart?.();
                         onClose();
                     }}
-                    className={classNames('button', styles['btn--delete'])}
 				>
                     Delete
-                </button>
+                </Button>
             </div>
         </div>
     );
