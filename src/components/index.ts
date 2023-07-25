@@ -3,6 +3,7 @@ export * from './NotFoundError/NotFoundError';
 export * from './Pagination/Pagination';
 export * from './PizzaBlock/PizzaBlock';
 export * from './Sort/Sort';
+export * from './ui/Button/Button';
 export * from './ui/CartItem/CartItem';
 export * from './ui/ConfirmDialog/ConfirmDialog';
 export * from './ui/EmptyCart/EmptyCart';

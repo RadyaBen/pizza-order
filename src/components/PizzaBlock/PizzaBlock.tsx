@@ -2,6 +2,7 @@ import React from 'react';
 import { Link, useParams, useLocation } from 'react-router-dom';
 import classNames from 'classnames';
 
+import { Button } from '../index';
 import { addPizzaToCart, selectCartItemById } from '../../redux/cart';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CartItem } from '../../interfaces';
@@ -75,9 +76,11 @@ export const PizzaBlock = ({
                 </div>
                 <div className='pizza-block__bottom'>
                     <div className='pizza-block__price'>From {price} ₴</div>
-                    <button
-                        className='button button--outline button--add'
-                        onClick={handleAddPizzaToCart}>
+                    <Button
+						variant='outline'
+						name='add'
+                        onClick={handleAddPizzaToCart}
+					>
                         <svg
                             width='12'
                             height='12'
@@ -92,7 +95,7 @@ export const PizzaBlock = ({
                         </svg>
                         <span>Add</span>
                         {cartTotalQuantity > 0 && <i>{cartTotalQuantity}</i>}
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>
