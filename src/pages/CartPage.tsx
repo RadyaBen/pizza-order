@@ -9,7 +9,7 @@ import {
 	ConfirmDialog,
 	EmptyCart,
 	TrashBinIcon,
- } from '../components';
+} from '../components';
 
 import { clearCart, selectCart } from '../redux/cart';
 import { useAppDispatch, useAppSelector } from '../hooks/redux';
@@ -60,7 +60,14 @@ export const CartPage = () => {
                         </div>
                         <div className='content__items'>
                             {cartItems.map((cartItem: CartItemType) => (
-                                <CartItem key={cartItem.id} cartItem={cartItem} />
+                                <CartItem
+                                    key={`cartItem-
+										${cartItem.id}
+										${cartItem.size}
+										${cartItem.type}`
+									}
+                                    cartItem={cartItem}
+                                />
                             ))}
                         </div>
                         <div className='cart__bottom'>

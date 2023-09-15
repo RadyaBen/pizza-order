@@ -3,6 +3,8 @@ export interface PizzaBlockProps {
     imageUrl: string;
     title: string;
     types: number[];
-    sizes: number[];
-    price: number;
+    sizeToPriceMap: {
+        size: number;
+        price: number;
+    }[];
 }

@@ -3,8 +3,10 @@ export interface PizzaItem {
     imageUrl: string;
     title: string;
     types: number[];
-    sizes: number[];
-    price: number;
+    sizeToPriceMap: {
+		size: number;
+		price: number;
+	}[];
     category: number;
     rating: number;
 }
