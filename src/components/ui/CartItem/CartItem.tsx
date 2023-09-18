@@ -8,33 +8,19 @@ import {
     removePizzaFromCart,
 } from '../../../redux/cart/cartSlice';
 import { useAppDispatch } from '../../../hooks/redux';
-import { CartItem as CartItemType } from '../../../interfaces';
 import { CartItemProps } from './CartItem.props';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
-export const CartItem = ({
-    cartItem: {
-		id,
-		imageUrl,
-		title,
-		type,
-		size,
-		price,
-		quantity,
-	}}: CartItemProps) => {
+export const CartItem = ({ cartItem }: CartItemProps) => {
     const dispatch = useAppDispatch();
 
     const handleIncreasePizzaQuantity = () => {
-        dispatch(
-            addPizzaToCart({
-                id,
-            } as CartItemType),
-        );
+        dispatch(addPizzaToCart(cartItem));
     };
 
     const handleDecreasePizzaQuantity = () => {
-        dispatch(decreaseCartQuantity(id));
+        dispatch(decreaseCartQuantity(cartItem));
     };
 
     const handleRemovePizza = () => {
@@ -45,7 +31,9 @@ export const CartItem = ({
                         title='Delete Confirmation'
                         message='Are you sure you want to delete this item?'
                         deletion='item'
-                        onRemovePizza={() => dispatch(removePizzaFromCart(id))}
+                        onRemovePizza={() =>
+							dispatch(removePizzaFromCart(cartItem))
+						}
                         onClose={onClose}
                     />
                 );
@@ -56,12 +44,16 @@ export const CartItem = ({
     return (
         <div className='cart__item'>
             <div className='cart__item-img'>
-                <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
+                <img
+					className='pizza-block__image'
+					src={cartItem.imageUrl}
+					alt='Pizza'
+				/>
             </div>
             <div className='cart__item-info'>
-                <h3>{title}</h3>
+                <h3>{cartItem.title}</h3>
                 <p>
-                    {type}, {size} cm.
+                    {cartItem.type}, {cartItem.size} cm.
                 </p>
             </div>
             <div className='cart__item-count'>
@@ -70,12 +62,14 @@ export const CartItem = ({
                     variant='outline'
                     shape='circle'
                     onClick={() => {
-                        quantity > 1 ? handleDecreasePizzaQuantity() : handleRemovePizza();
+                        cartItem.quantity > 1
+							? handleDecreasePizzaQuantity()
+							: handleRemovePizza();
                     }}
 				>
                     <PlusIcon />
                 </Button>
-                <b>{quantity}</b>
+                <b>{cartItem.quantity}</b>
                 <Button
                     className='cart__item-count-plus'
                     variant='outline'
@@ -86,7 +80,7 @@ export const CartItem = ({
                 </Button>
             </div>
             <div className='cart__item-price'>
-                <b>{price * quantity} ₴</b>
+                <b>{cartItem.price * cartItem.quantity} ₴</b>
             </div>
             <div className='cart__item-remove'>
                 <Button

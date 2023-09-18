@@ -14,13 +14,23 @@ const initialState: CartState = {
     cartTotalPrice,
 };
 
+const findPizzaInCart = (state: CartState, action: PayloadAction<CartItem>) => {
+	const { id, size, type } = action.payload;
+
+    return state.cartItems.find(
+		(pizza) =>
+			pizza.id === id &&
+			pizza.size === size &&
+			pizza.type === type,
+	);
+};
+
 const cartSlice = createSlice({
     name: 'cart',
     initialState,
     reducers: {
         addPizzaToCart: (state, action: PayloadAction<CartItem>) => {
-            const { id } = action.payload;
-            const pizzaInCart = state.cartItems.find((pizza) => pizza.id === id);
+            const pizzaInCart = findPizzaInCart(state, action);
 
             if (pizzaInCart) {
                 pizzaInCart.quantity++;
@@ -33,16 +43,21 @@ const cartSlice = createSlice({
 
             state.cartTotalPrice = getTotalCartPizzasPrice(state.cartItems);
         },
-        removePizzaFromCart: (state, action: PayloadAction<string>) => {
-            state.cartItems = state.cartItems.filter((item) => item.id !== action.payload);
+        removePizzaFromCart: (state, action: PayloadAction<CartItem>) => {
+			const pizzaInCart = findPizzaInCart(state, action);
+
+            state.cartItems = state.cartItems.filter(
+				(item) => item !== pizzaInCart,
+			);
+
             state.cartTotalPrice = getTotalCartPizzasPrice(state.cartItems);
         },
-        decreaseCartQuantity: (state, action: PayloadAction<string>) => {
-            const pizzaInCart = state.cartItems.find((pizza) => pizza.id === action.payload);
+        decreaseCartQuantity: (state, action: PayloadAction<CartItem>) => {
+            const pizzaInCart = findPizzaInCart(state, action);
 
             if (pizzaInCart) {
                 if (pizzaInCart.quantity === 1) {
-                    state.cartItems = state.cartItems.filter((item) => item.quantity > 0);
+                    cartSlice.caseReducers.removePizzaFromCart(state, action);
                 } else {
                     pizzaInCart.quantity--;
                 }

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import { AddIcon, Button } from '../index';
 
-import { addPizzaToCart, selectCartItemById } from '../../redux/cart';
+import { addPizzaToCart, selectCartItem } from '../../redux/cart';
 import { useAppDispatch, useAppSelector } from '../../hooks/redux';
 import { CartItem } from '../../interfaces';
 import { ROUTES, PIZZA_TYPE_NAMES } from '../../constants';
@@ -15,30 +15,37 @@ export const PizzaBlock = ({
 	imageUrl,
 	title,
 	types,
-	sizes,
-	price,
+	sizeToPriceMap,
 }: PizzaBlockProps) => {
     const [activePizzaType, setActivePizzaType] = React.useState(0);
     const [activePizzaSize, setActivePizzaSize] = React.useState(0);
 
-    const cartItem = useAppSelector(selectCartItemById(id));
+    const cartItem = useAppSelector(
+        selectCartItem(
+			id,
+			sizeToPriceMap[activePizzaSize].size,
+			PIZZA_TYPE_NAMES[activePizzaType],
+		),
+    );
     const dispatch = useAppDispatch();
 
-	const { pizzaId } = useParams();
-	const location = useLocation();
+    const { pizzaId } = useParams();
+    const location = useLocation();
+
+    const pizzaPrice = sizeToPriceMap[activePizzaSize].price;
 
     const cartTotalQuantity = cartItem ? cartItem.quantity : 0;
 
     const handleAddPizzaToCart = () => {
         const pizza: CartItem = {
-			id,
-			imageUrl,
-			title,
-			type: PIZZA_TYPE_NAMES[activePizzaType],
-			size: sizes[activePizzaSize],
-			price,
-			quantity: 0,
-		};
+            id,
+            imageUrl,
+            title,
+            type: PIZZA_TYPE_NAMES[activePizzaType],
+            size: sizeToPriceMap[activePizzaSize].size,
+            price: pizzaPrice,
+            quantity: 0,
+        };
         dispatch(addPizzaToCart(pizza));
     };
 
@@ -65,9 +72,9 @@ export const PizzaBlock = ({
                         ))}
                     </ul>
                     <ul>
-                        {sizes.map((size, i) => (
+                        {sizeToPriceMap.map(({ size }, i) => (
                             <li
-                                key={size}
+                                key={i}
                                 className={activePizzaSize === i ? 'active' : ''}
                                 onClick={() => setActivePizzaSize(i)}>
                                 {size} cm.
@@ -76,7 +83,7 @@ export const PizzaBlock = ({
                     </ul>
                 </div>
                 <div className='pizza-block__bottom'>
-                    <div className='pizza-block__price'>From {price} ₴</div>
+                    <div className='pizza-block__price'>From {pizzaPrice} ₴</div>
                     <Button
 						variant='outline'
 						name='add'
