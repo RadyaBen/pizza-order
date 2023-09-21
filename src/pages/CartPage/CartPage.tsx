@@ -9,12 +9,12 @@ import {
 	ConfirmDialog,
 	EmptyCart,
 	TrashBinIcon,
-} from '../components';
+} from '../../components';
 
-import { clearCart, selectCart } from '../redux/cart';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
-import { getTotalCartPizzasCount } from '../utils';
-import { CartItem as CartItemType } from '../interfaces';
+import { clearCart, selectCart } from '../../redux/cart';
+import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import { getTotalCartPizzasCount } from '../../utils';
+import { CartItem as CartItemType } from '../../interfaces';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
 
