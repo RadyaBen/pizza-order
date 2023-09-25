@@ -7,9 +7,9 @@ import {
 	PizzaBlock,
 	PizzaSkeleton,
 	NotFoundError,
-} from '../components';
+} from '../../components';
 
-import { PizzaItem } from '../interfaces';
+import { PizzaItem } from '../../interfaces';
 
 export const PizzaPage = () => {
     const [pizza, setPizza] = React.useState<PizzaItem | null>(null);

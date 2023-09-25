@@ -20,13 +20,23 @@ export const router = createBrowserRouter(
 				index
 				element={<HomePage />}
 			/>
-            <Route
+           <Route
 				path={ROUTES.pizzaPage()}
-				element={<LazyLoadPage componentName='PizzaPage' />}
+				element={
+					<LazyLoadPage
+						folderName='PizzaPage'
+						componentName='PizzaPage'
+					/>
+				}
 			/>
             <Route
 				path={ROUTES.cartPage}
-				element={<LazyLoadPage componentName='CartPage' />}
+				element={
+					<LazyLoadPage
+						folderName='CartPage'
+						componentName='CartPage'
+					/>
+				}
 			/>
         </Route>,
     ),
