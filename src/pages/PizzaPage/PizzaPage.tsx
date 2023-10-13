@@ -1,15 +1,17 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
-import classNames from 'classnames';
 
 import {
 	PizzaBlock,
 	PizzaSkeleton,
 	NotFoundError,
+	ArrowBackIcon,
 } from '../../components';
 
 import { PizzaItem } from '../../interfaces';
+
+import styles from './PizzaPage.module.scss';
 
 export const PizzaPage = () => {
     const [pizza, setPizza] = React.useState<PizzaItem | null>(null);
@@ -46,20 +48,39 @@ export const PizzaPage = () => {
         }
     };
 
-    const pizzaStyles = classNames({
-        'content__skeleton': !pizza,
-        'container': pizza,
-    });
-
     return (
-        <div className={pizzaStyles}>
+        <>
             {isRequestError ? (
                 <NotFoundError />
             ) : !pizza ? (
                 <PizzaSkeleton />
             ) : (
-                <PizzaBlock {...pizza} />
+                <div className={`container ${styles.pizza}`}>
+                    <img
+                        className={styles['pizza__image']}
+                        src={pizza.imageUrl}
+                        alt={pizza.title}
+                    />
+                    <div className={styles['pizza__content']}>
+                        <h2 className={styles['pizza__title']}>
+							{pizza.title}
+						</h2>
+                        <p className={styles['pizza__description']}>
+							{pizza.description}
+						</p>
+                        <PizzaBlock {...pizza} />
+                        <div className={styles['pizza__bottom']}>
+                            <Link
+								to='/'
+								className='button button--outline button--go-back'
+							>
+                                <ArrowBackIcon />
+                                <span>Back To Home</span>
+                            </Link>
+                        </div>
+                    </div>
+                </div>
             )}
-        </div>
+        </>
     );
 };
