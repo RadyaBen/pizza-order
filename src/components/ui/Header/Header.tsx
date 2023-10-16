@@ -1,4 +1,4 @@
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useParams } from 'react-router-dom';
 
 import { CartIcon, Search } from '../../index';
 
@@ -11,9 +11,13 @@ import pizzaLogo from '../../../assets/img/pizza-logo.svg';
 export const Header = () => {
     const { cartItems, cartTotalPrice } = useAppSelector(selectCart);
 
-    const location = useLocation();
+	const { pizzaId } = useParams();
+    const { pathname } = useLocation();
 
     const totalCartPizzasCount = getTotalCartPizzasCount(cartItems);
+
+	const isCartPageRoute = pathname !== '/cart';
+	const isPizzaPageRoute = pathname !== `/pizzas/${pizzaId}`;
 
     return (
         <div className='header'>
@@ -27,9 +31,11 @@ export const Header = () => {
                         </div>
                     </div>
                 </Link>
-                {location.pathname !== '/cart' && <Search />}
+                {isCartPageRoute && isPizzaPageRoute && (
+                    <Search />
+                )}
                 <div className='header__cart'>
-                    {location.pathname !== '/cart' && (
+                    {isCartPageRoute && (
                         <Link to='/cart' className='button button--cart'>
                             <span>{cartTotalPrice} ₴</span>
                             <div className='button__delimiter'></div>

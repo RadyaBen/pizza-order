@@ -30,11 +30,13 @@ export const PizzaBlock = ({
     const dispatch = useAppDispatch();
 
     const { pizzaId } = useParams();
-    const location = useLocation();
+    const { pathname } = useLocation();
 
     const pizzaPrice = sizeToPriceMap[activePizzaSize].price;
 
     const cartTotalQuantity = cartItem ? cartItem.quantity : 0;
+
+    const isPizzaPageRoute = pathname === `/pizzas/${pizzaId}`;
 
     const handleAddPizzaToCart = () => {
         const pizza: CartItem = {
@@ -50,16 +52,18 @@ export const PizzaBlock = ({
     };
 
     const linkStyles = classNames({
-        'disabled-link': location.pathname === `/pizzas/${pizzaId}`,
+        'disabled-link': isPizzaPageRoute,
     });
 
     return (
         <div className='pizza-block-wrapper'>
             <div className='pizza-block'>
-                <Link className={linkStyles} to={ROUTES.pizzaPage(id)}>
-                    <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
-                    <h4 className='pizza-block__title'>{title}</h4>
-                </Link>
+                {isPizzaPageRoute ? null : (
+                    <Link className={linkStyles} to={ROUTES.pizzaPage(id)}>
+                        <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
+                        <h4 className='pizza-block__title'>{title}</h4>
+                    </Link>
+                )}
                 <div className='pizza-block__selector'>
                     <ul>
                         {types.map((typeNumber) => (
