@@ -157,7 +157,10 @@ export const HomePage = () => {
                 ) : (
                     <div className={contentStyles}>
                         {pizzasRequestStatus === 'loading' ? (
-                            <PizzaSkeleton skeletonsQuantity={4} />
+                            <PizzaSkeleton
+								skeletonsQuantity={4}
+								isHomePageSkeleton
+							/>
                         ) : !pizzas.length && pizzasRequestStatus === 'succeeded' ? (
                             <NoResultsSearch searchQuery={searchQuery} />
                         ) : (
