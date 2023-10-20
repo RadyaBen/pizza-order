@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames';
 
 import { CartSkeleton, PizzaSkeleton } from '../../index';
 import { selectCart } from '../../../redux/cart';
@@ -24,26 +23,22 @@ export const LazyLoadPage = ({
             ),
         [folderName, componentName],
     );
-		
-	const isPizzaPage = componentName === 'PizzaPage';
-	const isCartPage = componentName === 'CartPage';
 
-    const fallbackStyles = classNames({
-        'content__skeleton': isPizzaPage,
-        'container container--cart': isCartPage,
-    });
+    const isPizzaPage = componentName === 'PizzaPage';
 
     return (
         <>
             <React.Suspense
                 fallback={
-                    <div className={fallbackStyles}>
+                    <>
                         {isPizzaPage ? (
                             <PizzaSkeleton />
                         ) : (
-                            <CartSkeleton cartItems={cartItems} />
+                            <div className='container container--cart'>
+                                <CartSkeleton cartItems={cartItems} />
+                            </div>
                         )}
-                    </div>
+                    </>
                 }>
                 <Component />
             </React.Suspense>
