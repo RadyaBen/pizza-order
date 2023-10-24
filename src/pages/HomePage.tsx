@@ -24,7 +24,11 @@ import {
 	QueryPizzaParameters,
 	fetchPizzas,
 } from '../redux/pizzas';
-import { useAppDispatch, useAppSelector } from '../hooks/redux';
+import {
+	useAppDispatch,
+	useAppSelector,
+	useDocumentTitle,
+} from '../hooks';
 import { PizzaItem } from '../interfaces';
 import { POPUP_SORT_TYPE_LIST } from '../constants';
 
@@ -48,6 +52,8 @@ export const HomePage = () => {
 
     const location = useLocation();
     const navigate = useNavigate();
+
+	useDocumentTitle('Pizza Order');
 
     React.useEffect(() => {
         if (isMounted.current) {
