@@ -9,6 +9,7 @@ import {
 	ArrowBackIcon,
 } from '../../components';
 
+import { useDocumentTitle } from '../../hooks/useDocumentTitle';
 import { PizzaItem } from '../../interfaces';
 
 import styles from './PizzaPage.module.scss';
@@ -19,6 +20,8 @@ export const PizzaPage = () => {
     const isEffectRun = React.useRef(false);
 
     const { pizzaId } = useParams();
+
+	useDocumentTitle(pizza?.title);
 
     React.useEffect(() => {
         const abortController = new AbortController();

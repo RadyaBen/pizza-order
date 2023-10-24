@@ -12,7 +12,11 @@ import {
 } from '../../components';
 
 import { clearCart, selectCart } from '../../redux/cart';
-import { useAppDispatch, useAppSelector } from '../../hooks/redux';
+import {
+	useAppDispatch,
+	useAppSelector,
+	useDocumentTitle,
+} from '../../hooks';
 import { getTotalCartPizzasCount } from '../../utils';
 import { CartItem as CartItemType } from '../../interfaces';
 
@@ -21,6 +25,8 @@ import 'react-confirm-alert/src/react-confirm-alert.css';
 export const CartPage = () => {
     const dispatch = useAppDispatch();
     const { cartItems, cartTotalPrice } = useAppSelector(selectCart);
+
+	useDocumentTitle('Cart');
 
     const totalCartPizzasCount = getTotalCartPizzasCount(cartItems);
 
