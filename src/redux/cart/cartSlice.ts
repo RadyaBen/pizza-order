@@ -1,4 +1,5 @@
 import { PayloadAction, createSlice } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 
 import {
 	getTotalCartPizzasPrice,
@@ -34,11 +35,13 @@ const cartSlice = createSlice({
 
             if (pizzaInCart) {
                 pizzaInCart.quantity++;
+				toast.info(`${pizzaInCart.title} quantity is increased`);
             } else {
                 state.cartItems.push({
                     ...action.payload,
                     quantity: 1,
                 });
+				toast.success(`${action.payload.title} is added to the cart`);
             }
 
             state.cartTotalPrice = getTotalCartPizzasPrice(state.cartItems);
@@ -48,6 +51,7 @@ const cartSlice = createSlice({
 
             state.cartItems = state.cartItems.filter(
 				(item) => item !== pizzaInCart,
+				toast.warn(`${pizzaInCart?.title} is deleted from the cart`),
 			);
 
             state.cartTotalPrice = getTotalCartPizzasPrice(state.cartItems);
@@ -60,6 +64,7 @@ const cartSlice = createSlice({
                     cartSlice.caseReducers.removePizzaFromCart(state, action);
                 } else {
                     pizzaInCart.quantity--;
+					toast.warn(`${pizzaInCart.title} quantity is decreased`);
                 }
             }
 
