@@ -1,0 +1,145 @@
+@use 'sass:color';
+@import '../../scss/variables';
+@import '../../scss/libs/normalize';
+
+.cart {
+    &__top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        margin-bottom: 35px;
+    }
+
+    .content__title {
+        display: flex;
+        align-items: center;
+
+        margin: 0;
+
+        font-size: 32px;
+
+        svg {
+            position: relative;
+            top: -2px;
+
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+
+            path {
+                stroke: $black;
+                stroke-width: 1.9;
+            }
+        }
+    }
+
+    &__clear {
+        display: flex;
+        align-items: center;
+
+        cursor: pointer;
+
+        span {
+            display: inline-block;
+
+            margin-left: 7px;
+
+            color: #b8b8b8;
+
+            font-size: 18px;
+        }
+
+        span,
+        svg,
+        path {
+            transition: all $duration ease-in-out;
+        }
+
+        &:hover {
+            svg {
+                path {
+                    stroke: color.adjust(#b6b6b6, $lightness: -50%);
+                }
+            }
+
+            span {
+                color: color.adjust(#b6b6b6, $lightness: -50%);
+            }
+        }
+
+        @include noselect;
+    }
+
+    &__bottom {
+        margin: 50px 0;
+
+        &-details {
+            display: flex;
+            justify-content: space-between;
+
+            span {
+                font-size: 22px;
+
+                &:last-of-type {
+                    b {
+                        color: $orange;
+                    }
+                }
+            }
+        }
+
+        &-buttons {
+            display: flex;
+            justify-content: space-between;
+
+            margin-top: 40px;
+
+            .pay-btn {
+                width: 210px;
+                padding: 16px;
+
+                font-size: 16px;
+                font-weight: 600;
+            }
+        }
+    }
+
+    @media (max-width: 540px) {
+        &__bottom {
+            &-details {
+                flex-direction: column;
+            }
+
+            &-details span {
+                margin-bottom: 15px;
+            }
+
+            &-buttons {
+                flex-direction: column;
+
+                margin: 0 auto;
+                margin-top: 20px;
+
+                .button--go-back {
+                    width: 100%;
+                    margin-bottom: 30px;
+                    padding: 16px;
+                }
+
+                .pay-btn {
+                    width: 100%;
+                }
+            }
+        }
+    }
+
+    @media (max-width: 700px) {
+        &__bottom-buttons {
+            display: flex;
+
+            margin: 0 auto;
+            margin-top: 40px;
+        }
+    }
+}

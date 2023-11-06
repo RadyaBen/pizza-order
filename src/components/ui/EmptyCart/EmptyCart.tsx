@@ -1,9 +1,16 @@
 import { Link } from 'react-router-dom';
+import classNames from 'classnames';
 
+import styles from './EmptyCart.module.scss';
 import emptyCartImg from '../../../assets/img/empty-cart.png';
 
+const backButtonStyles = classNames(
+	'button button--black',
+	styles['button--black'],
+);
+
 export const EmptyCart = () => (
-    <div className='cart cart--empty'>
+    <div className={styles['empty-cart']}>
         <h2>
             Your Cart is Empty <span>😕</span>
         </h2>
@@ -12,7 +19,7 @@ export const EmptyCart = () => (
             page to order pizzas.
         </p>
         <img src={emptyCartImg} alt='Empty cart' />
-        <Link to='/' className='button button--black'>
+        <Link to='/' className={backButtonStyles}>
             <span>Back To Home</span>
         </Link>
     </div>

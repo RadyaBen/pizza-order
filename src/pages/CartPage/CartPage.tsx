@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { confirmAlert } from 'react-confirm-alert';
+import classNames from 'classnames';
 
 import {
 	ArrowBackIcon,
@@ -21,6 +22,7 @@ import { getTotalCartPizzasCount } from '../../utils';
 import { CartItem as CartItemType } from '../../interfaces';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import styles from './CartPage.module.scss';
 
 export const CartPage = () => {
     const dispatch = useAppDispatch();
@@ -29,6 +31,15 @@ export const CartPage = () => {
 	useDocumentTitle('Cart');
 
     const totalCartPizzasCount = getTotalCartPizzasCount(cartItems);
+
+	const contentTitleStyles = classNames(
+		'content__title',
+		styles.content__title,
+	);
+	const backButtonStyles = classNames(
+        'button button--outline button--add button--go-back',
+        styles['button--go-back'],
+    );
 
     const handleClearCart = () => {
         confirmAlert({
@@ -52,19 +63,22 @@ export const CartPage = () => {
                 <EmptyCart />
             ) : (
                 <div className='container container--cart'>
-                    <div className='cart'>
-                        <div className='cart__top'>
-                            <h2 className='content__title'>
+                    <div className={styles.cart}>
+                        <div className={styles.cart__top}>
+                            <h2 className={contentTitleStyles}>
                                 <CartIcon />
                                 Cart
                             </h2>
-                            <div className='cart__clear' onClick={handleClearCart}>
+                            <div
+								className={styles.cart__clear}
+								onClick={handleClearCart}
+							>
                                 <TrashBinIcon />
 
                                 <span>Clear cart</span>
                             </div>
                         </div>
-                        <div className='content__items'>
+                        <div>
                             {cartItems.map((cartItem: CartItemType) => (
                                 <CartItem
                                     key={`cartItem-
@@ -76,8 +90,8 @@ export const CartPage = () => {
                                 />
                             ))}
                         </div>
-                        <div className='cart__bottom'>
-                            <div className='cart__bottom-details'>
+                        <div className={styles.cart__bottom}>
+                            <div className={styles['cart__bottom-details']}>
                                 <span>
                                     {' '}
                                     Total pizzas: <b>{totalCartPizzasCount} pcs.</b>{' '}
@@ -87,15 +101,16 @@ export const CartPage = () => {
                                     Order price: <b>{cartTotalPrice} ₴</b>{' '}
                                 </span>
                             </div>
-                            <div className='cart__bottom-buttons'>
+                            <div className={styles['cart__bottom-buttons']}>
                                 <Link
-                                    to='/'
-                                    className='button button--outline button--add button--go-back'>
+									to='/'
+									className={backButtonStyles}
+								>
                                     <ArrowBackIcon />
 
                                     <span>Go back</span>
                                 </Link>
-                                <Button className='button pay-btn'>
+                                <Button className={styles['pay-btn']}>
                                     <span>Pay now</span>
                                 </Button>
                             </div>

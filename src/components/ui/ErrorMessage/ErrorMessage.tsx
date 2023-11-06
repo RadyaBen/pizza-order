@@ -6,7 +6,10 @@ import { ErrorMessageProps } from './ErrorMessage.props';
 
 import styles from './ErrorMessage.module.scss';
 
-const errorStyles = classNames(styles['request-error'], 'content__error-message');
+const errorStyles = classNames(
+	styles['request-error'],
+	'content__error-message',
+);
 
 export const ErrorMessage = ({ requestError }: ErrorMessageProps) => {
     return (

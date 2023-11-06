@@ -185,14 +185,5 @@
         }
     }
 
-    &__delimiter {
-        width: 1px;
-        height: 25px;
-        margin-right: 14px;
-        margin-left: 14px;
-
-        background-color: rgb(255 255 255 / 25%);
-    }
-
     @include noselect;
 }

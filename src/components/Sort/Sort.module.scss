@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../../scss/variables';
 
 .sort {
     position: relative;
@@ -56,6 +56,14 @@
                     font-weight: bold;
                 }
             }
+        }
+    }
+
+    @media (max-width: 1260px) {
+        padding-left: 20px;
+
+        b {
+            display: none;
         }
     }
 }
