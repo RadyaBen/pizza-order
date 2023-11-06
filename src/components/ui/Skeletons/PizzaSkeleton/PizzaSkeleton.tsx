@@ -3,7 +3,8 @@ import Skeleton from 'react-loading-skeleton';
 import { PizzaSkeletonProps } from './PizzaSkeletonProps';
 
 import 'react-loading-skeleton/dist/skeleton.css';
-import styles from '../../../../pages/PizzaPage/PizzaPage.module.scss';
+import pizzaBlockStyles from '../../../PizzaBlock/PizzaBlock.module.scss';
+import pizzaPageStyles from '../../../../pages/PizzaPage/PizzaPage.module.scss';
 
 export const PizzaSkeleton = ({
 	skeletonsQuantity,
@@ -17,8 +18,8 @@ export const PizzaSkeleton = ({
 					height={88}
 				/>
             </div>
-            <div className='pizza-block__bottom'>
-                <div className='pizza-block__price'>
+            <div className={pizzaBlockStyles['pizza-block__bottom']}>
+                <div className={pizzaBlockStyles['pizza-block__price']}>
                     <Skeleton
 						width={121}
 						height={28}
@@ -41,8 +42,8 @@ export const PizzaSkeleton = ({
                 .fill(0)
                 .map((_, i) =>
                     isHomePageSkeleton ? (
-                        <div key={i} className='pizza-block-wrapper'>
-                            <div className='pizza-block'>
+                        <div key={i} className={pizzaBlockStyles['pizza-block-wrapper']}>
+                            <div className={pizzaBlockStyles['pizza-block']}>
                                 <div>
                                     <Skeleton
 										circle
@@ -52,7 +53,7 @@ export const PizzaSkeleton = ({
                                 </div>
                                 <div>
                                     <Skeleton
-                                        className='pizza-block__title'
+                                        className={pizzaBlockStyles['pizza-block__title']}
                                         style={{ marginTop: 20 }}
                                     />
                                 </div>
@@ -62,27 +63,27 @@ export const PizzaSkeleton = ({
                             </div>
                         </div>
                     ) : (
-                        <div key={i} className={`container ${styles.pizza}`}>
+                        <div key={i} className={`container ${pizzaPageStyles.pizza}`}>
                             <div>
                                 <Skeleton
-									className={styles['pizza__image']}
+									className={pizzaPageStyles.pizza__image}
 									circle
 								/>
                             </div>
-                            <div className={styles['pizza__content']}>
+                            <div className={pizzaPageStyles.pizza__content}>
                                 <div>
                                     <Skeleton
-                                        className={styles['pizza__title']}
+                                        className={pizzaPageStyles.pizza__title}
                                         style={{ margin: '30px 0' }}
                                     />
                                 </div>
                                 <div>
-                                    <Skeleton className={styles['pizza__description']} />
+                                    <Skeleton className={pizzaPageStyles.pizza__description} />
                                 </div>
-                                <div className='pizza-block-wrapper'>
-                                    <div className='pizza-block'>
+                                <div className={pizzaBlockStyles['pizza-block-wrapper']}>
+                                    <div className={pizzaBlockStyles['pizza-block']}>
                                         {pizzaBlockSkeletonItems}
-                                        <div className={styles['pizza__bottom']}>
+                                        <div className={pizzaPageStyles.pizza__bottom}>
                                             <Skeleton
                                                 style={{ marginTop: 60 }}
                                                 borderRadius={30}

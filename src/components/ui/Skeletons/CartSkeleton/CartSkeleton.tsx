@@ -1,10 +1,13 @@
 import React from 'react';
+import classNames from 'classnames';
 
 import Skeleton from 'react-loading-skeleton';
 
 import { CartSkeletonProps } from './CartSkeleton.props';
 
 import 'react-loading-skeleton/dist/skeleton.css';
+import cartItemStyles from '../../../ui/CartItem/CartItem.module.scss';
+import cartPageStyles from '../../../../pages/CartPage/CartPage.module.scss';
 
 export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
     const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
@@ -21,16 +24,21 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
 
 	const isMobileResponsive = windowWidth >= 540;
 
+	const contentTitleStyles = classNames(
+		'content__title',
+		cartPageStyles.content__title,
+	);
+
     return (
-        <div className='cart'>
-            <div className='cart__top'>
-                <h2 className='content__title'>
+        <div className={cartPageStyles.cart}>
+            <div className={cartPageStyles.cart__top}>
+                <h2 className={contentTitleStyles}>
                     <Skeleton
 						width={127}
 						height={30}
 					/>
                 </h2>
-                <div className='cart__clear'>
+                <div className={cartPageStyles.cart__clear}>
                     <Skeleton
 						width={106}
 						height={25}
@@ -40,9 +48,9 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
             {Array(cartItems.length)
                 .fill(0)
                 .map((_, i) => (
-                    <div key={i} className='content__items'>
-                        <div className='cart__item'>
-                            <div className='cart__item-img'>
+                    <div key={i} className={cartPageStyles.content__items}>
+                        <div className={cartItemStyles.cart__item}>
+                            <div className={cartItemStyles['cart__item-img']}>
                                 {isMobileResponsive ? (
                                     <Skeleton
 										circle
@@ -57,7 +65,7 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
 									/>
                                 )}
                             </div>
-                            <div className='cart__item-info'>
+                            <div className={cartItemStyles['cart__item-info']}>
                                 <h3>
                                     <Skeleton />
                                 </h3>
@@ -65,7 +73,7 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
                                     <Skeleton />
                                 </p>
                             </div>
-                            <div className='cart__item-count'>
+                            <div className={cartItemStyles['cart__item-count']}>
                                 <Skeleton
 									circle
 									width={32}
@@ -81,13 +89,13 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
 									height={32}
 								/>
                             </div>
-                            <div className='cart__item-price'>
+                            <div className={cartItemStyles['cart__item-price']}>
                                 <Skeleton
 									width={60}
 									height={30}
 								/>
                             </div>
-                            <div className='cart__item-remove'>
+                            <div className={cartItemStyles['cart__item-remove']}>
                                 <Skeleton
 									circle
 									width={32}
@@ -97,8 +105,8 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
                         </div>
                     </div>
                 ))}
-            <div className='cart__bottom'>
-                <div className='cart__bottom-details'>
+            <div className={cartPageStyles.cart__bottom}>
+                <div className={cartPageStyles['cart__bottom-details']}>
 					<Skeleton
 						width={199}
 						height={30}
@@ -109,7 +117,7 @@ export const CartSkeleton = ({ cartItems }: CartSkeletonProps) => {
 					/>
                 </div>
             </div>
-            <div className='cart__bottom-buttons'>
+            <div className={cartPageStyles['cart__bottom-buttons']}>
                 {isMobileResponsive ? (
                     <>
                         <Skeleton

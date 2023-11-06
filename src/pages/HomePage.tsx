@@ -143,7 +143,6 @@ export const HomePage = () => {
     const pizzaData = pizzas.map((pizza: PizzaItem) => <PizzaBlock key={pizza.id} {...pizza} />);
 
     const contentStyles = classNames({
-        'content__search-message': !pizzas.length && pizzasRequestStatus === 'succeeded',
         'content__items': pizzas.length || pizzasRequestStatus === 'loading',
     });
 

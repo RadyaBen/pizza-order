@@ -11,6 +11,7 @@ import { useAppDispatch } from '../../../hooks/redux';
 import { CartItemProps } from './CartItem.props';
 
 import 'react-confirm-alert/src/react-confirm-alert.css';
+import styles from './CartItem.module.scss';
 
 export const CartItem = ({ cartItem }: CartItemProps) => {
     const dispatch = useAppDispatch();
@@ -42,23 +43,23 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
     };
 
     return (
-        <div className='cart__item'>
-            <div className='cart__item-img'>
+        <div className={styles.cart__item}>
+            <div className={styles['cart__item-img']}>
                 <img
 					className='pizza-block__image'
 					src={cartItem.imageUrl}
 					alt='Pizza'
 				/>
             </div>
-            <div className='cart__item-info'>
+            <div className={styles['cart__item-info']}>
                 <h3>{cartItem.title}</h3>
                 <p>
                     {cartItem.type}, {cartItem.size} cm.
                 </p>
             </div>
-            <div className='cart__item-count'>
+            <div className={styles['cart__item-count']}>
                 <Button
-                    className='cart__item-count-minus'
+                    className={styles['cart__item-count-minus']}
                     variant='outline'
                     shape='circle'
                     onClick={() => {
@@ -71,7 +72,7 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
                 </Button>
                 <b>{cartItem.quantity}</b>
                 <Button
-                    className='cart__item-count-plus'
+                    className={styles['cart__item-count-plus']}
                     variant='outline'
                     shape='circle'
                     onClick={handleIncreasePizzaQuantity}
@@ -79,11 +80,12 @@ export const CartItem = ({ cartItem }: CartItemProps) => {
                     <PlusIcon />
                 </Button>
             </div>
-            <div className='cart__item-price'>
+            <div className={styles['cart__item-price']}>
                 <b>{cartItem.price * cartItem.quantity} ₴</b>
             </div>
-            <div className='cart__item-remove'>
+            <div className={styles['cart__item-remove']}>
                 <Button
+					className={styles.button}
 					variant='outline'
 					shape='circle'
 					onClick={handleRemovePizza}

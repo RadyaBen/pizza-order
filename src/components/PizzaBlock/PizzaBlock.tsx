@@ -10,6 +10,8 @@ import { CartItem } from '../../interfaces';
 import { ROUTES, PIZZA_TYPE_NAMES } from '../../constants';
 import { PizzaBlockProps } from './PizzaBlock.props';
 
+import styles from './PizzaBlock.module.scss';
+
 export const PizzaBlock = ({
 	id,
 	imageUrl,
@@ -56,21 +58,31 @@ export const PizzaBlock = ({
     });
 
     return (
-        <div className='pizza-block-wrapper'>
-            <div className='pizza-block'>
+        <div className={styles['pizza-block-wrapper']}>
+            <div className={styles['pizza-block']}>
                 {isPizzaPageRoute ? null : (
                     <Link className={linkStyles} to={ROUTES.pizzaPage(id)}>
-                        <img className='pizza-block__image' src={imageUrl} alt='Pizza' />
-                        <h4 className='pizza-block__title'>{title}</h4>
+                        <img
+							className={styles['pizza-block__image']}
+							src={imageUrl}
+							alt='Pizza'
+						/>
+                        <h4 className={styles['pizza-block__title']}>
+							{title}
+						</h4>
                     </Link>
                 )}
-                <div className='pizza-block__selector'>
+                <div className={styles['pizza-block__selector']}>
                     <ul>
                         {types.map((typeNumber) => (
                             <li
                                 key={typeNumber}
-                                className={activePizzaType === typeNumber ? 'active' : ''}
-                                onClick={() => setActivePizzaType(typeNumber)}>
+                                className={activePizzaType === typeNumber
+									? styles.active
+									: ''
+								}
+                                onClick={() => setActivePizzaType(typeNumber)}
+							>
                                 {PIZZA_TYPE_NAMES[typeNumber]}
                             </li>
                         ))}
@@ -79,15 +91,22 @@ export const PizzaBlock = ({
                         {sizeToPriceMap.map(({ size }, i) => (
                             <li
                                 key={i}
-                                className={activePizzaSize === i ? 'active' : ''}
-                                onClick={() => setActivePizzaSize(i)}>
+                                className={
+									activePizzaSize === i
+										? styles.active
+										: ''
+								}
+                                onClick={() => setActivePizzaSize(i)}
+							>
                                 {size} cm.
                             </li>
                         ))}
                     </ul>
                 </div>
-                <div className='pizza-block__bottom'>
-                    <div className='pizza-block__price'>From {pizzaPrice} ₴</div>
+                <div className={styles['pizza-block__bottom']}>
+                    <div className={styles['pizza-block__price']}>
+						From {pizzaPrice} ₴
+					</div>
                     <Button
 						variant='outline'
 						name='add'

@@ -1,0 +1,180 @@
+@use 'sass:color';
+@import '../../../scss/variables';
+@import '../../../scss/libs/normalize';
+
+.cart {
+    &__item {
+        display: flex;
+
+        width: 100%;
+        margin: 10px 0;
+        padding: 20px 0 25px;
+
+        border-bottom: 1px solid $gray-line;
+
+        &-img {
+            display: flex;
+            align-items: center;
+
+            margin-right: 15px;
+
+            img {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        &-info {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+
+            width: 40%;
+
+            h3 {
+                letter-spacing: 0.01em;
+
+                font-size: 20px;
+                font-weight: bold;
+                line-height: 27px;
+            }
+
+            p {
+                color: #8d8d8d;
+
+                font-size: 16px;
+            }
+        }
+
+        &-count {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            width: 13%;
+
+            &-minus {
+                svg {
+                    path:first-of-type {
+                        display: none;
+                    }
+                }
+            }
+
+            b {
+                font-size: 20px;
+            }
+        }
+
+        &-price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            width: 33%;
+
+            b {
+                letter-spacing: 0.01em;
+
+                font-size: 20px;
+                font-weight: bold;
+            }
+        }
+
+        &-remove {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+
+            width: 4%;
+
+            svg {
+                transform: rotate(45deg);
+            }
+
+            .button {
+                border-color: color.adjust($gray-line, $lightness: 10%);
+
+                svg {
+                    position: relative;
+
+                    width: 11.5px;
+                    height: 11.5px;
+
+                    path {
+                        fill: color.adjust($gray-line, $lightness: 10%);
+                    }
+                }
+
+                &:hover,
+                &:active {
+                    border-color: color.adjust($gray-line, $lightness: -80%);
+                    background-color: color.adjust($gray-line, $lightness: -80%);
+                }
+            }
+        }
+    }
+
+    @media (max-width: 540px) {
+        &__item {
+            flex-direction: column;
+
+            &-img {
+                margin-right: 0;
+
+                img {
+                    width: 150px;
+                    height: 150px;
+                    margin: 0 auto;
+                }
+            }
+
+            &-info {
+                width: 100%;
+
+                text-align: center;
+
+                h3 {
+                    margin-bottom: 10px;
+                }
+
+                p {
+                    margin-bottom: 20px;
+                }
+            }
+
+            &-count {
+                width: 106px;
+            }
+
+            &-price {
+                width: 100%;
+                margin: 0 auto;
+                margin-top: 30px;
+            }
+
+            &-remove {
+                position: absolute;
+                right: 40px;
+            }
+        }
+    }
+
+    @media (max-width: 700px) {
+        &__item {
+            align-items: center;
+
+            &-count {
+                width: 120px;
+            }
+        }
+    }
+
+    @media (min-width: 700px) and (max-width: 1000px) {
+        &__item {
+            &-count {
+                width: 108px;
+            }
+        }
+    }
+}

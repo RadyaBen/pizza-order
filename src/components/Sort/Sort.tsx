@@ -8,6 +8,8 @@ import { SortListType } from '../../interfaces';
 import { POPUP_SORT_TYPE_LIST } from '../../constants';
 import { SortProps } from './Sort.props';
 
+import styles from './Sort.module.scss';
+
 export const Sort = React.memo(({ selectedSortDataType }: SortProps) => {
     const [isVisiblePopup, setIsVisiblePopup] = React.useState(false);
     const sortRef = React.useRef<HTMLDivElement | null>(null);
@@ -32,8 +34,8 @@ export const Sort = React.memo(({ selectedSortDataType }: SortProps) => {
     };
 
     return (
-        <div className='sort' ref={sortRef}>
-            <div className='sort__label'>
+        <div className={styles.sort} ref={sortRef}>
+            <div className={styles.sort__label}>
                 <ArrowTopIcon />
                 <b>Sort by:</b>
                 <span onClick={() => setIsVisiblePopup(!isVisiblePopup)}>
@@ -41,15 +43,18 @@ export const Sort = React.memo(({ selectedSortDataType }: SortProps) => {
                 </span>
             </div>
             {isVisiblePopup && (
-                <div className='sort__popup'>
+                <div className={styles.sort__popup}>
                     <ul>
                         {POPUP_SORT_TYPE_LIST.map((popupData, i) => (
                             <li
                                 key={i}
                                 className={
-                                    selectedSortDataType.sortBy === popupData.sortBy ? 'active' : ''
+                                    selectedSortDataType.sortBy === popupData.sortBy
+                                        ? styles.active
+                                        : ''
                                 }
-                                onClick={() => handleSelectPopupName(popupData)}>
+                                onClick={() => handleSelectPopupName(popupData)}
+							>
                                 {popupData.name}
                             </li>
                         ))}
